@@ -9,15 +9,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringParser extends AbstractParser<String>{
+public class StringParser extends AbstractParser<String> {
     private final List<String> result = new ArrayList<>();
+
     @Override
     public void parse(List<String> files) {
         for (String filePath : files) {
             try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    if (parseLine(line) != null) {
+                    if (!isNumber(line)) {
                         result.add(line);
                     }
                 }
@@ -27,14 +28,6 @@ public class StringParser extends AbstractParser<String>{
                 System.out.println("Произошла ошибка при попытке работы с файлом");
             }
         }
-    }
-
-    public String parseLine(String line) {
-        if (isNumber(line)) {
-            return null;
-        }
-
-        return line;
     }
 
     public boolean isNumber(String line) {
@@ -70,6 +63,7 @@ public class StringParser extends AbstractParser<String>{
 
         return false;
     }
+
     @Override
     public List<String> getResult() {
         return result;

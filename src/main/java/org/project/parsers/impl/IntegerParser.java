@@ -13,11 +13,6 @@ public class IntegerParser extends AbstractParser<Integer>{
     private final List<Integer> result = new ArrayList<>();
 
     @Override
-    public List<Integer> getResult() {
-        return result;
-    }
-
-    @Override
     public void parse(List<String> files) {
         for (String filePath : files) {
             try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -35,5 +30,10 @@ public class IntegerParser extends AbstractParser<Integer>{
                 System.out.println("Произошла ошибка при попытке работы с файлом");
             }
         }
+    }
+
+    @Override
+    public List<Integer> getResult() {
+        return result;
     }
 }

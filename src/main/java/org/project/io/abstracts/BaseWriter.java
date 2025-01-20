@@ -7,13 +7,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class BaseWriter<T> implements Writer<T>{
+public class BaseWriter<T> implements Writer<T> {
     private Class<T> type;
     private String fileName;
     private double sum = 0;
     private int cnt = 0;
     private double max = Double.MIN_VALUE;
     private double min = Double.MAX_VALUE;
+
     @Override
     public void writeContents(List<T> contents, String path, String prefix, boolean isNeedToAddInExistingFiles) {
         String fullPath = fileName;
@@ -29,16 +30,16 @@ public class BaseWriter<T> implements Writer<T>{
         File file = new File(fullPath);
         File parentDirectory = file.getParentFile();
 
-        if (parentDirectory != null && !parentDirectory.exists()) {
-            if (!parentDirectory.mkdirs()) {
+        if (parentDirectory != null && ! parentDirectory.exists()) {
+            if (! parentDirectory.mkdirs()) {
                 System.err.println("Не удалось создать директорию: " + parentDirectory.getAbsolutePath());
             } else {
                 System.out.println("Директория успешно создана!");
             }
         }
 
-        try(FileWriter fileWriter = new FileWriter(file, isNeedToAddInExistingFiles)) {
-            for(T t: contents) {
+        try (FileWriter fileWriter = new FileWriter(file, isNeedToAddInExistingFiles)) {
+            for (T t : contents) {
                 fileWriter.write(t + "\n");
                 cnt++;
                 if (t instanceof String) {
@@ -46,7 +47,7 @@ public class BaseWriter<T> implements Writer<T>{
                     min = Math.min(min, ((String) t).length());
                 } else {
                     double value = Double.parseDouble(t.toString());
-                    sum+= value;
+                    sum += value;
                     max = Math.max(max, value);
                     min = Math.min(min, value);
                 }
