@@ -42,3 +42,24 @@ https://github.com/Alexander-Isakov/cft-parser-test.git
 2. Запускаем проект и видим, что программа создала файлы с нужными нам параметрами (с префиксом "new") и также вывела краткую статистику по кол-ву записанных данных.
 ![](src/main/resources/result.png)
 ![](src/main/resources/console-output.png)
+
+## Запуск и передача данных с помощью командной строки:
+1. Переходим в Maven и нажимаем "Execute Maven Goal"
+2. Выполняем следующую команду:
+```
+mvn clean compile assembly:single
+```
+3. Видим, что Maven создал нам JAR со всеми зависимостями по определенному пути:
+```
+   [INFO] Building jar: C:\Users\Public\cft-parser-test\target\parser-1-jar-with-dependencies.jar
+   [INFO] ------------------------------------------------------------------------
+   [INFO] BUILD SUCCESS
+   [INFO] ------------------------------------------------------------------------
+   [INFO] Total time:  2.661 s
+   [INFO] Finished at: 2025-01-20T23:28:40+04:00
+   [INFO] ------------------------------------------------------------------------
+```
+4. В Target папку передаем нужные нам файлы с входными данными и запускаем с помощью CMD. Пример:
+```
+java -jar parser-1-jar-with-dependencies.jar -f -p new- in1.txt in2.txt
+```
